@@ -138,7 +138,7 @@ class App extends Component {
         <Playlist playlist={playlist}/>
         )}
 
-      </div> : <div><h3 style={{'margin-top': "10%"}}>Sign in with Spotify</h3><button onClick={() =>window.location='http://localhost:8888/login'} 
+      </div> : <div><h3 style={{'margin-top': "10%"}}>Sign in with Spotify</h3><button onClick={() =>window.location='https://playlists-app-backend.herokuapp.com/login'} 
       className="btn btn-primary" style={{'margin-top': "1%"}}>Sign In</button></div>
       }
       </div>
