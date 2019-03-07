@@ -113,12 +113,9 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    setTimeout(()=>{
-      this.setState({serverData: fakeServerData});
-    }, 1000);
-    
   }
   render() {
+    
     let playlistsToRender = this.state.serverData.user ? this.state.serverData.user.playlists
     .filter(playlist =>
       playlist.name.toLowerCase().includes(
@@ -140,7 +137,9 @@ class App extends Component {
         {playlistsToRender.map(playlist =>
         <Playlist playlist={playlist}/>
         )}
-      </div> : <h2 style={{...defaultStyle}}>Loading...</h2>
+
+      </div> : <div><h3 style={{'margin-top': "10%"}}>Sign in with Spotify</h3><button onClick={() =>window.location='http://localhost:8888/login'} 
+      className="btn btn-primary" style={{'margin-top': "1%"}}>Sign In</button></div>
       }
       </div>
     );
