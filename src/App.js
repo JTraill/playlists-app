@@ -127,27 +127,27 @@ class App extends Component {
         : []
     return (
       <div className="App">
-      {this.state.user ?
-      <div>
-        <h1 style={{...defaultStyle, 'font-size': '54px'}}>
-          {this.state.user.name}'s Playlists
-        </h1>
-        <PlaylistCounter playlists={playlistToRender}/>
-        <HoursCounter playlists={playlistToRender}/>
-        <Filter onTextChange={text => {
-            this.setState({filterString: text})
-          }}/>
-        {playlistToRender.map(playlist => 
-          <Playlist playlist={playlist} />
-        )}
-      </div> : <button onClick={() => {
-          window.location = window.location.href.includes('localhost') 
-            ? 'http://localhost:8888/login' 
-            : 'https://playlists-app-backend.herokuapp.com/login' }
+        {this.state.user ?
+        <div>
+          <h1 style={{...defaultStyle, 'font-size': '54px'}}>
+            {this.state.user.name}'s Playlists
+          </h1>
+          <PlaylistCounter playlists={playlistToRender}/>
+          <HoursCounter playlists={playlistToRender}/>
+          <Filter onTextChange={text => {
+              this.setState({filterString: text})
+            }}/>
+          {playlistToRender.map(playlist => 
+            <Playlist playlist={playlist} />
+          )}
+        </div> : <div><h3>Sign in With Spotify</h3><button className="btn btn-primary" onClick={() => {
+            window.location = window.location.href.includes('localhost') 
+              ? 'http://localhost:8888/login' 
+              : 'https://playlists-app-backend.herokuapp.com/login' }
+          }
+          >Sign in</button></div>
         }
-        style={{padding: '20px', 'font-size': '50px', 'margin-top': '20px'}}>Sign in with Spotify</button>
-      }
-    </div>
+      </div>
     );
   }
 }
