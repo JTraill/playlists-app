@@ -65,19 +65,19 @@ class Filter extends Component{
 }
 
 class Playlist extends Component{
-  render(){
-    let playlist = this.props.playlist;
-    return(
-      <div style={{...defaultStyle, width:'25%', display:'inline-block'}}>
-        <img/>
+  render() {
+    let playlist = this.props.playlist
+    return (
+      <div style={{...defaultStyle, display: 'inline-block', width: "25%"}}>
+        <img src={playlist.imageUrl} style={{width: '60px'}}/>
         <h3>{playlist.name}</h3>
-        <ul style={{...defaultStyle}}>
-          {playlist.songs.map(song=>
-            <ol>{song.name}</ol>
-            )}
+        <ul>
+          {playlist.songs.map(song => 
+            <li>{song.name}</li>
+          )}
         </ul>
       </div>
-    )
+    );
   }
 }
 
@@ -94,15 +94,19 @@ class App extends Component {
     let accessToken = parsed.access_token;
     if (!accessToken)
       return;
-    fetch('https://api.spotify.com/v1/me', {
-      headers: {'Authorization': 'Bearer ' + accessToken}
-    }).then(response => response.json())
-    .then(data => this.setState({
-      user: {
-        name: data.display_name
-      }
-    }))
-
+      fetch('https://api.spotify.com/v1/me/playlists', {
+        headers: {'Authorization': 'Bearer ' + accessToken}
+      }).then(response => response.json())
+      .then(data => this.setState({
+        playlists: data.items.map(item => {
+          console.log(data.items)
+          return {
+            name: item.name,
+            imageUrl: item.images[0].url, 
+            songs: []
+          }
+      })
+      }))
     fetch('https://api.spotify.com/v1/me/playlists', {
       headers: {'Authorization': 'Bearer ' + accessToken}
     }).then(response => response.json())
